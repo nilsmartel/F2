@@ -1,5 +1,6 @@
 
 use std::ops::Add;
+use std::ops::AddAssign;
 use std::fmt;
 
 #[cfg(test)]
@@ -12,6 +13,13 @@ mod tests {
         assert_eq!(F2::True + F2::False, F2::True);
         assert_eq!(F2::False + F2::True, F2::True);
         assert_eq!(F2::False + F2::False, F2::False);
+    }
+
+    #[test]
+    fn check_addAssign() {
+        let mut f2 = F2::True;
+        f2 += F2::True;
+        assert_eq!(f2, F2::False);
     }
 }
 
@@ -39,6 +47,12 @@ impl Add for F2 {
             return F2::False;
         }
         F2::True
+    }
+}
+
+impl AddAssign for F2 {
+    fn add_assign(&mut self, f: F2) {
+        *self = if *self == f { F2::False } else { F2::True }
     }
 }
 
