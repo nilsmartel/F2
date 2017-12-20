@@ -3,23 +3,24 @@ use std::ops::Add;
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
     fn check_add() {
-        assert_eq!(2 + 2, 4);
+        assert_eq!(F2::True + F2::True, F2::False);
+        assert_eq!(F2::True + F2::False, F2::True);
+        assert_eq!(F2::False + F2::True, F2::True);
+        assert_eq!(F2::False + F2::False, F2::False);
     }
 }
 
-#[derive(PartialEq, PartialOrd)]
+#[derive(Debug, PartialEq, PartialOrd)]
 pub enum F2 {
     False,
     True,
 }
 
 impl F2 {
-    #[doc = /**
-     * new
-     * convert a Boolean to Field F2
-     */]
     pub fn new(value: bool) -> F2 {
         if value {
             return F2::True;
@@ -34,9 +35,8 @@ impl Add for F2 {
 
     fn add(self, f: Self) -> Self {
         if self == f {
-            return self;
+            return F2::False;
         }
-
         F2::True
     }
 }
