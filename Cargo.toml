@@ -1,0 +1,6 @@
+[package]
+name = "f2"
+version = "0.1.0"
+authors = ["314 <nils.martel@concepts-system.com>"]
+
+[dependencies]
